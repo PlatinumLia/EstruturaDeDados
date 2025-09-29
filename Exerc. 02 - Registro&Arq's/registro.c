@@ -25,7 +25,7 @@ void inserirAlunos(){
     int numCadastros;
     int i; //será usado no loop FOR
     
-    printf("\n---- CADASTRO DA TURMA ----\n"); // Informações da turma
+    printf("\n\n---- CADASTRO DA TURMA ----\n\n"); // Informações da turma
     do{ 
         printf("Informe o número de alunos: ");
         scanf("%d", &numCadastros);
@@ -39,7 +39,7 @@ void inserirAlunos(){
     dt.qtdAlunos = numCadastros; //salva a quantidade de alunos cadastrados
     printf("\n..........................\n");
 
-    printf("--- CADASTRO DOS ALUNOS ---");
+    printf("\n--- CADASTRO DOS ALUNOS ---\n");
     //inserindo os dados dos alunos
     for(i = 0; i < numCadastros; i++){
         printf("\n--- %dº aluno ---\n", i+1);
@@ -72,10 +72,9 @@ void inserirAlunos(){
 //função para listar os alunos da turma
 void exibirAlunos(){
     int i;
-    printf("---- LISTA DE ALUNOS ----\n");
+    printf("\n\n---- LISTA DE ALUNOS ----\n\n");
     printf("Nº alunos: %d\n", dt.qtdAlunos);
     for(i = 0; i < dt.qtdAlunos; i++){
-        printf(".......................\n");
         printf("--- %dº aluno ---\n", i+1);
         printf("| Nome: \t%s\n", dt.turma[i].nome);
         printf("| Matricula: \t%d\n", dt.turma[i].matricula);
@@ -124,7 +123,7 @@ int main(){
     
     //validação da opção do menu
     do{
-		printf("---- MENU ----\n");
+		printf("\n---- MENU ----\n");
 		printf("| [1] - Inserir alunos\n");
 		printf("| [2] - Exibir alunos\n");
         printf("| [3] - Salvar alunos\n");
