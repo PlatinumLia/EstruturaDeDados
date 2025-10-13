@@ -162,7 +162,11 @@ int main()
 				printf("\nNº que deseja buscar na lista: ");
 				scanf("%d", &num);
 				p = buscaLista(lista1, num);
-				printf("Número: %d\n", p->dado);
+				if(p != NULL){
+					printf("Número: %d\n", p->dado);	
+				}else{
+					printf("\nNº não encontrado!\n");
+				}
 				printf("\n");
 				break;
 			case 4:
