@@ -24,17 +24,15 @@ Nodo *p;
 //definindo uma Lista com ponteiro para nodo
 typedef Nodo *Lista;
 
-//usando o malloc
-p = malloc(MAXITENS);
-
 //função que cria a lista
 Lista criaLista(){
-		return NULL;
+	return NULL;
 }
 
-Lista lista1; //variável da lista 1
-lista1 = criaLista(); //inicialização da lista 1 (lista vazia)
-
+/*	
+ * 	Lista lista1;
+	lista1 = criaLista();*/
+	
 //função que insere um novo elemento na lista
 // OBS: essa função sempre coloca o novo elemento
 // 		no começo da lista por ser uma lista encadeada
@@ -42,57 +40,12 @@ Lista inserirNaLista(Lista l, int e){
 	Lista novo;
 	
 	//alocando um espaço na memória
-	// e faz a atribuição dde valores
 	novo = malloc(sizeof(struct TElemento));
+	
+	//atribuição de valores
 	novo -> dado = e;
 	novo -> prox = l; //o próximo do novo é o início da lista
 	return (novo); //retorna o endereçamento do novo elemento
-}
-
-//função que exibe o conteúdo da lista
-// imprime todos os nodos da lista 1
-void imprimeLista(Lista l){
-	Lista p; //ponteiro auxiliar: percorre a lista
-	
-	printf("\n-- ITENS DA LISTA --\n");
-	p = 1; //apontando para o início da lista
-	while(p != NULL){ //enquanto não chega ao fim da lista
-		printf("%d - ", p->dado); //imprime o elemento
-		p = p->prox; //ponteiro avança para o próximo Nodo
-	}
-	printf("\n");
-}
-
-//função que conta o Nº de elementos
-int contaLista(Lista l){
-	Lista p; //percorre a lista
-	int cont = 0; //iniciar contador em 0
-	
-	p = 1; //apontando para o início da lista
-	while(p != NULL){ //enquanto a lista não acabou
-		cont++; //incrementando o cont
-		p = p->prox; //passa para o próximo elemento
-	}
-	return cont; //retorna o contador
-}
-
-//função que busca um elemento
-// procura o elemento na lista, retornando o endereço
-// do elemento se estiver na lista
-// retorna NULL em caso contrário
-Lista buscaLista(Lista l, int e){
-	Lista p; //ponteiro para percorrer a lista
-	
-	p = 1; //início da lista
-	
-	//percorrer a lista enquanto não chegar no final
-	// e não encontrar o elemento
-	while((p != NULL) && (p->dado != e)){
-		p = p->prox;
-	}
-	return (p); //retorna o endereçamento do nodo encontrado
-				// ou NULL caso chegue ao final sem encontrar
-				// o elemento da lista
 }
 
 //função que retira o elemento da lista.
@@ -102,8 +55,8 @@ Lista retirarDaLista(Lista l, int e){
 	Lista p,	//ponteiro p para o elemento atual
 		  ant;	//ponteiro ant para o elemento anterior
 		  
-	p = 1;
-	ant = 1;
+	p = l;
+	ant = l;
 	
 	//procurando elemento até o fim da lista ou até o encontrar
 	while((p != NULL) && (p->dado != e)){//procura o elemento e
@@ -122,35 +75,113 @@ Lista retirarDaLista(Lista l, int e){
 	return (l);
 }
 
+//função que busca um elemento
+// procura o elemento na lista, retornando o endereço
+// do elemento se estiver na lista
+// retorna NULL em caso contrário
+Lista buscaLista(Lista l, int e){
+	Lista p; //ponteiro para percorrer a lista
+	
+	p = l; //início da lista
+	
+	//percorrer a lista enquanto não chegar no final
+	// e não encontrar o elemento
+	while((p != NULL) && (p->dado != e)){
+		p = p->prox;
+	}
+	return (p); //retorna o endereçamento do nodo encontrado
+				// ou NULL caso chegue ao final sem encontrar
+				// o elemento da lista
+}
+
+//função que conta o Nº de elementos
+int contaLista(Lista l){
+	Lista p; //percorre a lista
+	int cont = 0; //iniciar contador em 0
+	p = l; //apontando para o início da lista
+	
+	while(p != NULL){ //enquanto a lista não acabou
+		cont++; //incrementando o cont
+		p = p->prox; //passa para o próximo elemento
+	}
+	return cont; //retorna o contador
+}
+
+//função que exibe o conteúdo da lista
+// imprime todos os nodos da lista 1
+void imprimeLista(Lista l){
+	Lista p; //ponteiro auxiliar: percorre a lista
+	
+	printf("\n-- ITENS DA LISTA --\n");
+	p = l; //apontando para o início da lista
+	while(p != NULL){ //enquanto não chega ao fim da lista
+		printf("%d - ", p->dado); //imprime o elemento
+		p = p->prox; //ponteiro avança para o próximo Nodo
+	}
+	printf("\n");
+}
+
 int main()
 {
-	Lista l;
-	l = criaLista();
-	int opc, inserir, retirar;
+	Lista lista1;
+	lista1 = criaLista();
+	int opc, num, retirar, conta;
 	
 	do{
 		printf("\n--- MENU ---\n");
 		printf("\n[1]. Inserir elemento\n");
-		printf("\n[2]. Retirar elemento\n");
-		printf("\n[3]. Buscar elemento\n");
-		printf("\n[4]. Imprimir conteúdo\n");
-		printf("\n[5]. Contar o Nº de elemento\n");
-		printf("\n[0]. Sair\n");
+		printf("[2]. Retirar elemento\n");
+		printf("[3]. Buscar elemento\n");
+		printf("[4]. Imprimir conteúdo\n");
+		printf("[5]. Contar o Nº de elemento\n");
+		printf("[0]. Sair\n");
 		
 		printf("\nOpção desejada: ");
 		scanf("%d", &opc);
 		if(opc <= 0 && opc > 5){
 			printf("\nOpção inválida!\n");
 		}
-	}while(opc <= 0 && opc > 5);
-	
-	switch(opc){
-		case 1:
-			printf("\nNº que deseja inserir na lista: ");
-			scanf("%d", &inserir);
-			inserirNaLista(l, inserir);
-			break;
-	}
+		
+		switch(opc){
+			case 1:
+				printf("\n---- INSERINDO ----\n");
+				printf("\nNº que deseja inserir na lista: ");
+				scanf("%d", &num);
+				lista1 = inserirNaLista(lista1, num);
+				printf("\n");
+				break;
+			case 2:
+				printf("\n---- REMOVENDO ----\n");
+				printf("\nNº que deseja retirar da lista: ");
+				scanf("%d", &retirar);
+				lista1 = retirarDaLista(lista1, retirar);
+				printf("\n");
+				break;
+			case 3:
+				printf("\n---- BUSCANDO ----\n");
+				printf("\nNº que deseja buscar na lista: ");
+				scanf("%d", &num);
+				p = buscaLista(lista1, num);
+				printf("Número: %d\n", p->dado);
+				printf("\n");
+				break;
+			case 4:
+				printf("\n ---- IMPRIMINDO CONTEÚDO ----\n\n");
+				imprimeLista(lista1);
+				break;
+			case 5:
+				printf("\n---- CONTANDO ITENS DA LISTA ----\n\n");
+				conta = contaLista(lista1);
+				printf("Quantidade de itens na lista: %d", conta);
+				printf("\n");
+				break;
+			case 0:
+				printf("SAINDO...");
+				break;
+			default:
+				printf("OPÇÃO INVÁLIDA!");
+		}
+	}while(opc != 0);
 	
 	return 0;
 }
