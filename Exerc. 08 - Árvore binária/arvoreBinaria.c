@@ -116,6 +116,31 @@ void antecessor(Arvore a, Arvore *x){
 	}
 }
 
+void retiraArvore(Arvore *a, int valor){
+	Arvore aux;
+	
+	if(*a != NULL){
+		if(valor > ((*a)->dado)){ //retira da sub-árvore da direta
+			retiraArvore(&((*a)->dir), valor);
+		}else if(valor < ((*a)->dado)){ //retira da sub-árvore da esquerda 
+			retiraArvore(&((*a)->esq), valor);
+		}else{ //achou, vair remover o elemento
+			if((*a)->dir == NULL){ //elemento sem filho na direita
+								  // promove o filho da esquerda
+				aux = (*a);
+				*a = aux->esq;
+				free(aux);
+			}else if((*a)->esq == NULL){ //não tem filho na esquerda
+										// promove o filho da direita
+				aux = (*a)->dir;
+				free(*a);
+				*a = aux;
+			}else{ //elemento tem dois filhos, promove o antecessor
+				antecessor(*a, &((*a)->esq));
+			}
+		}
+	}
+}
 
 //função para mostrar um menu
 int menu(){
@@ -152,7 +177,7 @@ int main(){
 				printf("\n=*= INSERIR ELEMENTO =*=\n\n");
 				printf("Nº que deseja inserir: ");
 				scanf("%d", &insereValor);
-				a = insereArvore(a, insereValor);
+				insereArvore(&a, insereValor);
 				printf("\n");
 				break;
 
@@ -160,7 +185,7 @@ int main(){
 				printf("\n=*= RETIRAR ELEMENTO =*=\n\n");
 				printf("Nº que deseja retirar: ");
 				scanf("%d", &retiraValor);
-				a = retiraArvore(a, retiraValor);
+				retiraArvore(&a, retiraValor);
 				printf("\n");
 				break;
 				
