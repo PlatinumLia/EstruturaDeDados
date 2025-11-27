@@ -32,6 +32,14 @@ int buscaSeq(int *vet, int tam, int valor) {
     return (pos);
 }
 
+void inserir(int *vet) {
+    int i; 
+    for(i = 0; i < TAM; i++){
+        printf("Nº [%d]: ", i);
+        scanf("%d", &valor);
+    }
+}
+
 //função para mostrar um menu
 int menu() {
     int opc;
@@ -64,24 +72,19 @@ int main()
         switch(opc){
             case 1:
                 printf("\n=*= INSERIR ELEMENTOS =*=\n\n");
-                
-                for(i = 0; i < TAM; i++){
-                    printf("Nº [%d]: ", i+1);
-                    scanf("%d", &valor);
-                }
-                
+                inserir(vet);            
                 break;
             
             case 2:
                 printf("\n=*= BUSCA SEQUENCIAL =*=\n\n");
                 printf("Nº que deseja buscar: ");
                 scanf("%d", &valor);
-                s = buscaSeq(vet[TAM], TAM, valor);
+                s = buscaSeq(vet, TAM, valor);
                 
                 if(!s){
                     printf("Valor não encontrado!\n\n");
                 }else{
-                    printf("Elemento encontrado!\nPosição do elemento: []");
+                    printf("Elemento encontrado!\nPosição do elemento: [%d]", s);
                 }
                 
                 break;
@@ -89,4 +92,5 @@ int main()
     }while(opc != 0);
     
     return 0;
+
 }
