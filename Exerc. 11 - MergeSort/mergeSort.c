@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-#define TAM 5
+#define TAM 10
 
 // Intercala dois subvetores do vetor vet no vetor aux.
 // O primeiro subvetor inicia na posição esq, e vai até meio
